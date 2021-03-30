@@ -4,8 +4,12 @@ import java.util.Date;
 
 class Cozinha{
 
+  public enum Origem{
+    Mineira, Chinesa, Italiana, Alema
+  }
+
   public Cozinha (int numeroPratos,
-                  String tipo,
+                  Origem tipo,
                   int numeroCozinheiros,
                   int tempoPreparo,
                   int horaAbertura,
@@ -20,17 +24,18 @@ class Cozinha{
                   this.horaAbertura = horaAbertura;
                   this.horaFechamento = horaFechamento;
                   this.pratoPrincipal = pratoPrincipal;
-
+                  ingredientes = new ArrayList<>();
+                  funcionarios = new ArrayList<>();
   }
   private int numeroPratos;
-  private String tipo;
+  private Origem tipo;
   private int numeroCozinheiros;
   private int tempoPreparo;
   private int horaAbertura;
   private int horaFechamento;  
   private String pratoPrincipal;
-  private List<Ingrediente> ingredientes = new ArrayList<>();
-  private List<Funcionario> funcionarios = new ArrayList<>();
+  private List<Ingrediente> ingredientes;
+  private List<Funcionario> funcionarios;
 
 void acrescentarIngredientes(String nome, Date dataValidade){
   Ingrediente ingrediente = new Ingrediente(nome, dataValidade);
@@ -51,9 +56,26 @@ void adicionarFuncionario(String nome, String atividade){
       retorno += "Tipo:"+ tipo + "\n";
       retorno += "Cozinheiros: " + numeroCozinheiros + "\n";
       retorno += "Tempo de Preparo: " + tempoPreparo + "\n";
-      retorno += "Abertura: " + horaAbertura + " às " + horaFechamento;
+      retorno += "Abertura: " + horaAbertura + " às " + horaFechamento + "\n\n";
 
       stringBuilder.append(retorno);
+
+      stringBuilder.append("Principais ingredientes \n");
+
+      for(Ingrediente ingrediente : ingredientes){
+        retorno = ingrediente.nome.toString() +"\n";
+        stringBuilder.append(retorno);
+      }
+
+      stringBuilder.append("\n Funcionários \n");
+
+      for(Funcionario funcionario : funcionarios){
+        retorno = funcionario.nome.toString() +"\n";
+        stringBuilder.append(retorno);
+      }
+
+
+
       return stringBuilder.toString();                      
                     
     }
